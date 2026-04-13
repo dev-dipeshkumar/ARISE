@@ -5,6 +5,7 @@ import { StatusBar } from '@/components/status-bar'
 import { QuestsSidebar, Quest } from '@/components/quests-sidebar'
 import { ChatConsole } from '@/components/chat-console'
 import { ParticleBackground } from '@/components/particle-background'
+import { ShadowAvatar } from '@/components/shadow-avatar'
 
 export default function ArisePage() {
   const [monarchRank, setMonarchRank] = useState(1)
@@ -68,6 +69,7 @@ export default function ArisePage() {
 
   return (
     <div className="h-screen flex flex-col overflow-hidden relative animate-page-fade-in">
+      <ShadowAvatar isActive={isAiActive} isTyping={isTyping} />
       <ParticleBackground isTyping={isTyping} isActive={isAiActive} />
       
       <div className={`relative z-10 flex flex-col h-full transition-all duration-500 ${isTyping ? 'focus-mode-active' : ''}`}>

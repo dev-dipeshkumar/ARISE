@@ -414,6 +414,13 @@ function LoadingMessage() {
 }
 
 function ErrorMessage({ message }: { message?: string | null }) {
+  // Custom error formatting for specific errors
+  const isImageError = message?.toLowerCase().includes('image') || message?.toLowerCase().includes('cannot read')
+  
+  const displayMessage = isImageError 
+    ? 'Cannot read image. This model does not support image input. Send text commands only, Monarch.'
+    : message || 'System Glitch Detected. Attempting recovery...'
+
   return (
     <div className="flex gap-3 animate-message-enter">
       <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-destructive/30 border border-destructive/50 flex items-center justify-center">
@@ -423,10 +430,12 @@ function ErrorMessage({ message }: { message?: string | null }) {
         <div className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">
           SYSTEM
         </div>
-        <div className="px-4 py-3 rounded-lg bg-destructive/10 border border-destructive/30 glow-border-accent">
-          <p className="text-sm text-destructive font-mono">
-            {message || 'System Glitch Detected. Attempting recovery...'}
-          </p>
+        <div className={`px-4 py-3 rounded-lg font-mono text-sm border ${
+          isImageError 
+            ? 'bg-amber-950/30 border-amber-700/50 text-amber-400' 
+            : 'bg-destructive/10 border-destructive/30 glow-border-accent text-destructive'
+        }`}>
+          <p className="whitespace-pre-wrap">{displayMessage}</p>
         </div>
       </div>
     </div>
