@@ -71,7 +71,6 @@ export async function POST(req: Request) {
         },
       }),
     },
-    maxSteps: 3,
   })
 
   return result.toUIMessageStreamResponse({
